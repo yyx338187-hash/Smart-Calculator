@@ -1,6 +1,14 @@
 #Calculator?#
 #By MEEEeee#
 #Require Python 3.14.7 final#
+#Cuz I forgets#
+#cd "C:\Users\User\Desktop\Python code\smart-calculator"#
+#git status#
+#git add .#
+#git status#
+#git commit -m "Add credits function"#
+#git push#
+
 
 import pyfiglet
 import time
