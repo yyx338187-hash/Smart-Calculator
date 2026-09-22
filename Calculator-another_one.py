@@ -10,103 +10,104 @@
 #git push#
 #Yep#
 
-
 import pyfiglet
 import time
 
 figlet = pyfiglet.Figlet(font="standard")
+print(figlet.renderText("Smart Calculator"))
 
-def title_text():
-    print(figlet.renderText("Smart Calculator"))
-def credits():
-    print("\nThis calculator was created by MEEEeee.")
-    time.sleep(0.5)
-    print("Version: 1.0.0")
-    time.sleep(0.5)
-    print("Release Date: 2024-06-01")
-def greet_user(name):
-    print("Hello, " + name + "!")
-def operation_menu():
-    print("\nAvailable operations:")
-    print("+ addition")
-    print("- subtraction")
-    print("* multiplication")
-    print("/ division")
+def end_program():
+    while True:
+        result = input("\nDo you want to continue? (yes/no) ").lower()
+        
+        if result not in valids:
+            print("\nInvalid input. Please enter 'yes' or 'no'.")
+            time.sleep(0.25)
+            continue
+            
+        if result == "no" or result == "end":
+            print("\nGood bye!")
+            exit()
+        elif result == "yes":
+            time.sleep(0.25)
+            return True
+def greet_user(name, greeting="Welcome"):
+    print(greeting + ", " + name + "!")
+def operation_menu(title="Available operations"):
+    available_operations = [
+        "+ addition",
+        "- subtraction",
+        "* multiplication",
+        "/ division"
+    ]
+    print(f"\n{title}:")
+    for operations in available_operations:
+        print(operations)
 def addition(num1, num2):
-    return num1 + num2
+    return True, num1 + num2
 def subtraction(num1, num2):
-    return num1 - num2
+    return True, num1 - num2
 def multiplication(num1, num2):
-    return num1 * num2
+    return True, num1 * num2
 def division(num1, num2):
     if num2 == 0:
-        return "Error: Division by zero is not allowed."
-    return num1 / num2
-def main():
-    while True:
+        return False, "Division by zero is not allowed."
+    return True, num1 / num2
+operation_functions = {
+    "+": addition,
+    "addition": addition,
 
-        try:
-            number1 = input("\nEnter your first number:  ").lower()
-            if number1 == "end":break
-            number1 = float(number1)
+    "-": subtraction,
+    "subtraction": subtraction,
 
-            operation_menu()
+    "*": multiplication,
+    "multiplication": multiplication,
 
-            operation = input("\nChoose calculation:  ").lower()
-
-            if operation not in ["+", "addition", "-", "subtraction", "*", "multiplication", "/", "division"]:
-                print("\nInvalid operation.")
-                continue
-            number2 = input("\nEnter your second number:  ").lower()
-            if number2 == "end":
-                break
-            number2 = float(number2)
-
-            if operation in ["+", "addition"]:
-                result = addition(number1, number2)
-                print("\nThe result is:\n" + str(result))
-            elif operation in ["-", "subtraction"]:
-                result = subtraction(number1, number2)
-                print("\nThe result is:\n" + str(result))
-            elif operation in ["*", "multiplication"]:
-                result = multiplication(number1, number2)
-                print("\nThe result is:\n" + str(result))
-            elif operation in ["/", "division"]:
-                result = division(number1, number2)
-                print("\nThe result is:\n" + str(result))
-            continue_calculation = input("\nWould you like another calculation?\nEnter 'yes' or 'no':  ").lower()
-            if continue_calculation == "yes":
-                continue
-            elif continue_calculation == "no":
-                print("\nGood bye, " + name + "!")
-                break
-            else:
-                print("\nInvalid input. Exiting the calculator.")
-                break
-                
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            break
+    "/": division,
+    "division": division,
+}
+valids = {
+    "yes",
+    "no",
+    "end",
+    }
 
 time.sleep(1.25)
-
-Haha = input("R u from TISKL?\n\nEnter 'yes' or 'no':  ").lower()
-
-if Haha == "yes":
-    print("\n*Evil laugh*")
-    time.sleep(1.25)
-    print("\nWELCOME...")
-    main()
-else:
-    print("Welcome to the Smart Calculator!")
-
-name = input("\nWelcome to Smart Calculator!\n\nWhat is your name?  ")
-if name.lower() == "end":
-    print("\nGood bye!")
-    exit()
-
+name = input("\nWelcome to Smart Calculator!\n\nWhat is your name? ")
 greet_user(name)
 
-credits()
-
-main()
+while True:
+    try:
+        number1 = input("\nEnter your first number: ").lower()
+        if number1 == "end":
+            exit()
+        number1 = float(number1)
+        
+        operation_menu()
+        operation = input("\nChoose calculation: ").lower()
+        if operation == "end":
+            exit()
+        if operation not in operation_functions:
+            print("\nInvalid operation.")
+            continue
+            
+        number2 = input("\nEnter your second number: ").lower()
+        if number2 == "end":
+            exit()
+        number2 = float(number2)
+        
+        selected_function = operation_functions[operation]
+        a, b = selected_function(number1, number2)
+        
+        if a:
+            print("\nThe result is: " + str(b))
+        else:
+            print("\nError: " + str(b))
+            
+        time.sleep(0.75)
+        
+        end_program()
+        
+    except ValueError:
+        print("\nInvalid input. Please enter a valid number.")
+        continue
