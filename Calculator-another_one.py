@@ -34,12 +34,12 @@ def end_program():
 def greet_user(name, greeting="Welcome"):
     print(greeting + ", " + name + "!")
 def operation_menu(title="Available operations"):
-    symbols = {
+    symbols = [
         "(+)",
         "(-)",
         "(*)",
         "(/)",
-    }
+    ]
     available_operations = [
         "Addition",
         "Subtraction",
