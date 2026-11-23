@@ -34,15 +34,21 @@ def end_program():
 def greet_user(name, greeting="Welcome"):
     print(greeting + ", " + name + "!")
 def operation_menu(title="Available operations"):
+    symbols = {
+        "(+)",
+        "(-)",
+        "(*)",
+        "(/)",
+    }
     available_operations = [
-        "+ addition",
-        "- subtraction",
-        "* multiplication",
-        "/ division"
+        "Addition",
+        "Subtraction",
+        "Multiplication",
+        "Division",
     ]
     print(f"\n{title}:")
-    for operations in available_operations:
-        print(operations)
+    for number, (symbol, available_operation) in enumerate(zip(symbols, available_operations), start=1):
+        print(f"{number}. {available_operation}{symbol}")
 def addition(num1, num2):
     return True, num1 + num2
 def subtraction(num1, num2):
@@ -56,15 +62,19 @@ def division(num1, num2):
 operation_functions = {
     "+": addition,
     "addition": addition,
+    "1": addition,
 
     "-": subtraction,
     "subtraction": subtraction,
+    "2": subtraction,
 
     "*": multiplication,
     "multiplication": multiplication,
+    "3": multiplication,
 
     "/": division,
     "division": division,
+    "4": division,
 }
 valids = {
     "yes",
