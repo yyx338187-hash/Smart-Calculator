@@ -16,6 +16,18 @@ import time
 figlet = pyfiglet.Figlet(font="standard")
 print(figlet.renderText("Smart Calculator"))
 
+def run_tests():
+    assert addition(5, 3) == (True, 8), "Addition test 1 failed."
+    assert addition(-5, 3) == (True, -2), "Addition test 2 failed."
+    assert subtraction(10, 4) == (True, 6), "Subtraction test 1 failed."
+    assert subtraction(3, 10) == (True, -7), "Subtraction test 2 failed."
+    assert multiplication(6, 7) == (True, 42), "Multiplication test 1 failed."
+    assert multiplication(100, 0) == (True, 0), "Multiplication test 2 failed."
+    assert division(10, 2) == (True, 5.0), "Division test 1 failed."
+    assert division(7, 2) == (True, 3.5), "Division test 2 failed."
+    assert division(0, 5) == (True, 0), "Division test 3 failed."
+    assert division(10, 0) == (False, "Division by zero is not allowed."), "Division test 4 failed."
+    print("All tests passed!")
 def end_program():
     while True:
         result = input("\nDo you want to continue? (yes/no) ").lower()
